@@ -145,18 +145,33 @@
 
         //executed when onChange() is triggered on duration filter dropdown
         function selectDuration(event) {
-            // TODO: MODULE_FILTERS
-            // 1. Change the DOM to show the selected duration filter. Use the provided input event
-            // 2. Invoke saveFiltersToLocalStorage here
+  // TODO: MODULE_FILTERS
+  // 1. Change the DOM to show the selected duration filter. Use the provided input event            
+  // 2. Invoke saveFiltersToLocalStorage here
+  document.getElementById("data").textContent = "";
+  let duration = event.target.value;
+  
 
-        }
+  filters["duration"]=duration;
+  //filters["duration"] = filters["duration"].filter(onlyUnique);
+
+
+  generateFilterPillsAndUpdateDOM(filters);
+  let filteredAdventures = filterFunction(adventures, filters);
+  addAdventureToDOM(filteredAdventures);
+}
 
         //executed when clear button is clicked on duration filter dropdown
         function clearDuration(event) {
-            // TODO: MODULE_FILTERS
-            // 1. Change the DOM to clear the Duration filter. Refer clearCategory() below
-            // 2. Invoke saveFiltersToLocalStorage here
-
+        // TODO: MODULE_FILTERS
+        // 1. Change the DOM to clear the Duration filter. Refer clearCategory() below
+        // 2. Invoke saveFiltersToLocalStorage here
+        document.getElementById("data").textContent = "";
+        //document.getElementById("duration-select").textContent = "";
+        document.getElementById("duration-select").selectedIndex = 0;
+        filters["duration"] ="";
+        let filteredAdventures = filterFunction(adventures, filters);
+        addAdventureToDOM(filteredAdventures);
         }
 
 
@@ -171,8 +186,6 @@
 
             filters["category"].push(category);
             filters["category"] = filters["category"].filter(onlyUnique);
-
-
             generateFilterPillsAndUpdateDOM(filters);
             let filteredAdventures = filterFunction(adventures, filters);
             addAdventureToDOM(filteredAdventures);
@@ -208,4 +221,3 @@
 </body>
 
 </html>
-
